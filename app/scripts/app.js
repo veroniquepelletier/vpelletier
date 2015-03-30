@@ -23,11 +23,15 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
       .otherwise({
         redirectTo: '/'
       });
+  })
+  .run(function($rootScope, $location, $anchorScroll) {
+    $rootScope.scrollTo = function (id) {
+      var old = $location.hash();
+      $location.hash(id);
+      $anchorScroll();
+      $location.hash(old);
+    };
   });
